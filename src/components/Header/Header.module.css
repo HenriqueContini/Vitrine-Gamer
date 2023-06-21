@@ -1,0 +1,24 @@
+.header {
+  background-color: var(--light-background);
+  padding: 15px 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.icon__container {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: center;
+}
+
+.icon__container img {
+  max-width: 50px;
+}
+
+.icon__container h1 {
+  font-size: 1.25rem;
+  color: var(--white);
+  font-weight: 400;
+  text-transform: uppercase;
+}

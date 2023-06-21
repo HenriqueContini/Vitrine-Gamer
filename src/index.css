@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 :root {
   --main-color: #0094FF;
@@ -6,7 +6,7 @@
   --light-background: #1B2838;
   --white: #FFFFFF;
 
-  --font: 'Inter', sans-serif;
+  --font: 'Montserrat', sans-serif;
 }
 
 * {

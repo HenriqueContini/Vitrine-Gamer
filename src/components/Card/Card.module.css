@@ -1,0 +1,33 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border-radius: 15px;
+  padding-bottom: 10px;
+  transition: .5s;
+  background-color: var(--light-background);
+}
+
+.card:hover {
+  border-color: var(--main-color);
+}
+
+.card__img {
+  border-radius: 15px 15px 0 0;
+}
+
+.card__title {
+  color: var(--white);
+  font-size: 1rem;
+  text-align: center;
+  font-weight: 400;
+}
+
+.card__genre {
+  background-color: var(--gray);
+  color: var(--white);
+  text-align: center;
+  padding: 5px 10px;
+  align-self: center;
+  border-radius: 5px;
+}

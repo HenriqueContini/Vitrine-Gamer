@@ -2,5 +2,32 @@
   display: flex;
   flex-direction: column;
   gap: 40px;
-  padding: 20px;
+  padding: 40px 20px;
+  align-items: center;
+}
+
+.card__container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1400px;
+}
+
+@media screen and (min-width: 600px) {
+  .card__container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+}
+
+@media screen and (min-width: 1080px) {
+  .container {
+    padding: 80px;
+    gap: 60px;
+  }
+
+  .card__container {
+    gap: 50px;
+  }
 }

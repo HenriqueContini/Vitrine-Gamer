@@ -8,7 +8,13 @@ export default function Home() {
     <main className={styles.container}>
       <Banner />
       <Search />
-      <Card />
+      <section className={styles.card__container}>
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+      </section>
     </main>
   )
 }

@@ -31,3 +31,9 @@
   align-self: center;
   border-radius: 5px;
 }
+
+@media screen and (min-width: 600px) {
+  .card {
+    max-width: 300px;
+  }
+}

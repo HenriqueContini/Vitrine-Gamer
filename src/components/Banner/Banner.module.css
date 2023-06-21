@@ -3,6 +3,7 @@
   flex-direction: column;
   background-color: var(--light-background);
   border-radius: 15px;
+  max-width: 700px;
 }
 
 .banner__img {
@@ -28,4 +29,18 @@
 .banner__text {
   font-weight: 300;
   color: #acacac;
+}
+
+@media screen and (min-width: 600px) {
+  .banner__container {
+    flex-direction: row;
+  }
+
+  .banner__img {
+    border-radius: 15px 0 0 15px;
+  }
+
+  .banner__article {
+    justify-content: space-around;
+  }
 }

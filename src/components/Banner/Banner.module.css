@@ -1,10 +1,30 @@
 .banner__container {
-  padding: 20px 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  background-color: var(--light-background);
+  border-radius: 15px;
 }
 
 .banner__img {
   max-width: 100%;
-  border-radius: 15px;
+  border-radius: 15px 15px 0 0;
+}
+
+.banner__article {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  color: var(--white);
+}
+
+.banner__title {
+  font-weight: 400;
+}
+
+.banner__text {
+  font-weight: 300;
+  color: #acacac;
 }

@@ -60,9 +60,9 @@ export default function Home() {
         <>
           {!dataError.error && data ? <>
             {bannerData && <Banner title={bannerData.title} thumbnail={bannerData.thumbnail} short_description={bannerData.short_description} />}
-            <Search data={data} filteredData={filteredData} setFilteredData={setFilteredData}/>
+            <Search data={data} setFilteredData={setFilteredData}/>
             <section className={styles.card__container}>
-              {filteredData && filteredData.map(game => <Card key={game.id} title={game.title} thumbnail={game.thumbnail} genre={game.genre} />)}
+              {filteredData.map(game => <Card key={game.id} title={game.title} thumbnail={game.thumbnail} genre={game.genre} />)}
             </section>
           </> :
             <ApiError errorMessage={dataError.msg} handleError={handleErrorButton} />

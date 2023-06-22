@@ -5,30 +5,39 @@ import { IoClose } from 'react-icons/io5'
 
 interface SearchProps {
   data: Game[]
-  filteredData: Game[]
   setFilteredData: Dispatch<SetStateAction<Game[]>>
 }
 
-export default function Search({ data, filteredData, setFilteredData }: SearchProps) {
+export default function Search({ data, setFilteredData }: SearchProps) {
   const [inputGameValue, setInputGameValue] = useState<string>('')
+  const [selectedGenre, setSelectedGenre] = useState<string>('default')
   const [genres, setGenres] = useState<string[]>([])
 
   const filterGame = (value: string) => {
     setInputGameValue(value)
     setFilteredData(data.filter(game => game.title.toUpperCase().includes(value.toUpperCase())))
+    setSelectedGenre('default')
   }
 
   const clearGame = () => {
     setInputGameValue('')
     setFilteredData(data)
+    setSelectedGenre('default')
   }
 
   const filterGenre = (genre: string) => {
-    setFilteredData(filteredData.filter(game => game.genre === genre))
-  }
+    setSelectedGenre(genre)
 
-  const clearGenre = () => {
-    filterGame(inputGameValue)
+    if (genre === 'default' && inputGameValue) {
+      filterGame(inputGameValue)
+    } else if (genre === 'default' && !inputGameValue) {
+      setFilteredData(data)
+    } else if (genre !== 'default' && inputGameValue) {
+      const newArr = data.filter(item => item.genre === genre && item.title.toUpperCase().includes(inputGameValue.toUpperCase()))
+      setFilteredData(newArr)
+    } else {
+      setFilteredData(data.filter(game => game.genre === genre))
+    }
   }
 
   useEffect(() => {
@@ -53,9 +62,9 @@ export default function Search({ data, filteredData, setFilteredData }: SearchPr
           <IoClose />
         </div>
       </div>
-      <select name="genre" className={styles.search__genre__select}>
-        <option value="" onClick={() => clearGenre()}>Selecione o gênero </option>
-        {genres.map((item, index) => <option key={index} value={item} onClick={() => filterGenre(item)}>{item}</option>)}
+      <select name="genre" className={styles.search__genre__select} value={selectedGenre} onChange={(e) => filterGenre(e.target.value)}>
+        <option value="default">Selecione o gênero </option>
+        {genres.map((item, index) => <option key={index} value={item} >{item}</option>)}
       </select>
     </div>
   )

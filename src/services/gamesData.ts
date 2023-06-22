@@ -8,7 +8,7 @@ async function getGamesData(): Promise<ApiResponse> {
   try {
     const response: AxiosResponse<Game[]> = await axios.get(URL, {
       headers: {
-        'dev-email-address': 'henriquecontini03@gmail.com'
+        'dev-email-address': 'frontclient@gmail.com'
       },
       timeout: 5000
     })

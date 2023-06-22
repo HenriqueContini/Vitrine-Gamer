@@ -4,25 +4,25 @@
   gap: 20px;
 }
 
-.search__title {
+.title {
   text-align: center;
   font-weight: 400;
   color: var(--white);
   font-size: 1.5rem;
 }
 
-.search__title span {
+.title span {
   color: var(--main-color);
 }
 
-.search {
+.search__game {
   background-color: var(--light-background);
   display: flex;
   flex-direction: row;
   border-radius: 15px;
 }
 
-.search__input {
+.search__game__input {
   background-color: transparent;
   flex: 1;
   color: var(--white);
@@ -37,11 +37,11 @@
   outline: none;
 }
 
-.search__input:focus {
+.search__game__input:focus {
   border-color: var(--main-color);
 }
 
-.search__icon {
+.search__game__icon {
   display: flex;
   align-items: center;
   color: var(--white);
@@ -55,9 +55,18 @@
   transition: .4s;
 }
 
-.search__icon:hover {
-  color: var(--main-color);
-  border-color: var(--main-color);
+.search__genre__select {
+  background-color: var(--light-background);
+  color: #848b94;
+  font-size: 1rem;
+  padding: 10px;
+  height: 42px;
+  width: 100%;
+  border-radius: 15px;
+}
+
+.search__genre__select option {
+  color: var(--white);
 }
 
 @media screen and (min-width: 600px) {

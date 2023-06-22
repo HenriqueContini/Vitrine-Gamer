@@ -49,10 +49,10 @@ export default function Home() {
   }
 
   useEffect(() => {
-    setIsLoading(true)
+    /* setIsLoading(true)
     setDataError({ error: false, msg: '' })
     setData([])
-    fetchData()
+    fetchData() */
   }, [])
 
   return (
@@ -61,7 +61,7 @@ export default function Home() {
         <>
           {!dataError.error && data ? <>
             {bannerData && <Banner title={bannerData.title} thumbnail={bannerData.thumbnail} short_description={bannerData.short_description} />}
-            <Search data={data} setFilteredData={setFilteredData}/>
+            <Search data={data} filteredData={filteredData} setFilteredData={setFilteredData}/>
             <section className={styles.card__container}>
               {filteredData && filteredData.map(game => <Card key={game.id} title={game.title} thumbnail={game.thumbnail} genre={game.genre} />)}
             </section>

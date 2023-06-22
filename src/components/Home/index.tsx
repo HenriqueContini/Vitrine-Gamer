@@ -13,12 +13,11 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [dataError, setDataError] = useState<{ error: boolean, msg: string }>({ error: false, msg: '' })
   const [data, setData] = useState<Game[]>([])
-  const [filteredData, setFilteredData] = useState<Game[]>()
+  const [filteredData, setFilteredData] = useState<Game[]>([])
   const [bannerData, setBannerData] = useState<Game>()
 
   const fetchData = async () => {
     const response: ApiResponse | undefined = await getGamesData()
-    console.log(response)
 
     if (response.data) {
       setDataError({ error: false, msg: '' })
@@ -49,10 +48,10 @@ export default function Home() {
   }
 
   useEffect(() => {
-    /* setIsLoading(true)
+    setIsLoading(true)
     setDataError({ error: false, msg: '' })
     setData([])
-    fetchData() */
+    fetchData()
   }, [])
 
   return (

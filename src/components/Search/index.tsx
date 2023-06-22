@@ -6,7 +6,7 @@ import { IoClose } from 'react-icons/io5'
 interface SearchProps {
   data: Game[]
   filteredData: Game[]
-  setFilteredData: Dispatch<SetStateAction<Game[] | undefined>>
+  setFilteredData: Dispatch<SetStateAction<Game[]>>
 }
 
 export default function Search({ data, filteredData, setFilteredData }: SearchProps) {

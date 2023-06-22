@@ -1,12 +1,15 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Banner from '../Banner'
 import Card from '../Card'
 import Search from '../Search'
 import styles from './Home.module.css'
 import getGamesData from '../../services/gamesData'
 import ApiResponse from '../../interfaces/ApiResponse'
+import Loader from '../Loader'
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+
   const fetchData = async () => {
     const response: ApiResponse | undefined = await getGamesData()
 
@@ -23,6 +26,8 @@ export default function Home() {
       console.log('O servidor não conseguirá responder por agora, tente voltar novamente mais tarde')
       console.log(response?.status)
     }
+
+    setIsLoading(false)
   }
 
   useEffect(() => {
@@ -31,7 +36,9 @@ export default function Home() {
 
   return (
     <main className={styles.container}>
-      <Banner />
+      {isLoading && <Loader />}
+      
+      {/* <Banner />
       <Search />
       <section className={styles.card__container}>
         <Card />
@@ -39,7 +46,7 @@ export default function Home() {
         <Card />
         <Card />
         <Card />
-      </section>
+      </section> */}
     </main>
   )
 }

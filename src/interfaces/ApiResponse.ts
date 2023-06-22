@@ -1,4 +1,4 @@
-import Game from "./game"
+import Game from "./Game"
 
 interface ApiResponse {
   data?: Game[]

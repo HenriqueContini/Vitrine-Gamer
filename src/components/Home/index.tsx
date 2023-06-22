@@ -6,28 +6,46 @@ import styles from './Home.module.css'
 import getGamesData from '../../services/gamesData'
 import ApiResponse from '../../interfaces/ApiResponse'
 import Loader from '../Loader'
+import ApiError from '../ApiError'
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [dataError, setDataError] = useState<{error: boolean, msg: string}>({error: false, msg: ''})
 
   const fetchData = async () => {
     const response: ApiResponse | undefined = await getGamesData()
 
-    if(response?.data) {
+    if (response?.data) {
       console.log("Dados:")
       console.log(response.data)
     } else if (response?.code === 'ECONNABORTED') {
-      console.log('O servidor demorou para responder, tente mais tarde')
-      console.log(response.code)
+      setDataError({
+        error: true,
+        msg: 'O servidor demorou para responder, tente mais tarde'
+      })
     } else if (response?.status && response.status >= 500 && response.status <= 509) {
-      console.log('O servidor fahou em responder, tente recarregar a página')
-      console.log(response?.status)
+      setDataError({
+        error: true,
+        msg: 'O servidor falhou em responder, tente recarregar a página'
+      })
     } else {
-      console.log('O servidor não conseguirá responder por agora, tente voltar novamente mais tarde')
-      console.log(response?.status)
+      setDataError({
+        error: true,
+        msg: 'O servidor não conseguirá responder por agora, tente voltar novamente mais tarde'
+      })
     }
 
     setIsLoading(false)
+  }
+
+  const handleErrorButton = () => {
+    setIsLoading(true)
+    setDataError({
+      error: false,
+      msg: ''
+    })
+
+    fetchData()
   }
 
   useEffect(() => {
@@ -36,8 +54,12 @@ export default function Home() {
 
   return (
     <main className={styles.container}>
-      {isLoading && <Loader />}
-      
+      {isLoading ? <Loader /> :
+        dataError.error && <ApiError errorMessage={dataError.msg} handleError={handleErrorButton}/>
+        
+      }
+
+
       {/* <Banner />
       <Search />
       <section className={styles.card__container}>

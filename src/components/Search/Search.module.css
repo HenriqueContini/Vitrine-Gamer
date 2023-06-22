@@ -55,6 +55,11 @@
   transition: .4s;
 }
 
+.search__game__icon:hover {
+  color: var(--main-color);
+  border-color: var(--main-color);
+}
+
 .search__genre__select {
   background-color: var(--light-background);
   color: #848b94;

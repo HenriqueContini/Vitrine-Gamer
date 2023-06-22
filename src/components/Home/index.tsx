@@ -18,26 +18,20 @@ export default function Home() {
 
   const fetchData = async () => {
     const response: ApiResponse | undefined = await getGamesData()
+    console.log(response)
 
-    if (response?.data) {
+    if (response.data) {
+      setDataError({ error: false, msg: '' })
       setData(response.data)
       setFilteredData(response.data)
+
       let newBanner: Game = response.data[Math.floor(Math.random() * response.data.length)]
       setBannerData(newBanner)
-    } else if (response?.code === 'ECONNABORTED') {
-      setDataError({
-        error: true,
-        msg: 'O servidor demorou para responder, tente mais tarde'
-      })
-    } else if (response?.status && response.status >= 500 && response.status <= 509) {
-      setDataError({
-        error: true,
-        msg: 'O servidor falhou em responder, tente recarregar a página'
-      })
     } else {
+      setData([])
       setDataError({
-        error: true,
-        msg: 'O servidor não conseguirá responder por agora, tente voltar novamente mais tarde'
+        error: response.error,
+        msg: response.msg!
       })
     }
 

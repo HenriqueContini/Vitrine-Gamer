@@ -1,9 +1,9 @@
 import Game from "./Game"
 
 interface ApiResponse {
+  error: boolean
   data?: Game[]
-  status?: number
-  code?: string
+  msg?: string
 }
 
 export default ApiResponse

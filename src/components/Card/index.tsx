@@ -9,7 +9,7 @@ interface CardProps {
 export default function Card({title, thumbnail, genre}: CardProps) {
   return (
     <div className={styles.card}>
-      <img className={styles.card__img} src={thumbnail} alt={`Imagem ${title}`} />
+      <img className={styles.card__img} src={thumbnail} alt={`Imagem ${title}`} loading='lazy'/>
       <h4 className={styles.card__title}>{title}</h4>
       <p className={styles.card__genre}>{genre}</p>
     </div>

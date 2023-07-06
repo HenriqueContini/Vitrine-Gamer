@@ -1,11 +1,11 @@
 import { TailSpin } from 'react-loader-spinner'
-import styles from './Loader.module.css'
+import * as S from './styles'
 
 export default function Loader() {
   return (
-    <section className={styles.loader__container}>
-      <TailSpin color='#0094FF' wrapperClass={styles.loader}/>
-      <h2 className={styles.loader__title}>Carregando dados...</h2>
-    </section>
+    <S.LoaderContainer>
+      <TailSpin color='#068FFF' wrapperClass="loader"/>
+      <S.LoaderTitle>Carregando dados...</S.LoaderTitle>
+    </S.LoaderContainer>
   )
 }

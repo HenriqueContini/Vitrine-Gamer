@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import Banner from '../Banner'
-import Card from '../Card'
-import Search from '../Search'
+import Banner from '../../components/Banner'
+import Card from '../../components/Card'
+import Search from '../../components/Search'
 import styles from './Home.module.css'
 import getGamesData from '../../services/gamesData'
 import ApiResponse from '../../interfaces/ApiResponse'
-import Loader from '../Loader'
-import ApiError from '../ApiError'
+import Loader from '../../components/Loader'
+import ApiError from '../../components/ApiError'
 import Game from '../../interfaces/Game'
 
 export default function Home() {

@@ -3,6 +3,7 @@ import Game from "../interfaces/Game"
 import ApiResponse from "../interfaces/ApiResponse"
 
 const URL = 'https://games-test-api-81e9fb0d564a.herokuapp.com/api/data'
+const statusArr = [500, 502, 503, 504, 507, 508, 509]
 
 async function getGamesData(): Promise<ApiResponse> {
   try {
@@ -17,7 +18,7 @@ async function getGamesData(): Promise<ApiResponse> {
     if (isAxiosError(error)) {
       if(error.code === 'ECONNABORTED') {
         return {error: true, msg: 'O servidor demorou para responder, tente mais tarde.'}
-      } else if (error.status && error.status >= 500 && error.status <= 509) {
+      } else if (error.status && statusArr.includes(error.status)) {
         return {error: true, msg: 'O servidor falhou em responder, tente recarregar a página.'}
       }
     }

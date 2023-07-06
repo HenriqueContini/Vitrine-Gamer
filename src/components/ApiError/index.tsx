@@ -1,4 +1,4 @@
-import styles from './ApiError.module.css'
+import * as S from './styles'
 
 interface ApiErrorProps {
   errorMessage: string
@@ -7,9 +7,10 @@ interface ApiErrorProps {
 
 export default function ApiError({errorMessage, handleError}: ApiErrorProps) {
   return (
-    <section className={styles.error__container}>
-      <h2 className={styles.error__message}>{errorMessage}</h2>
-      <button className={styles.error__button} onClick={handleError}>Recarregar</button>
-    </section>
+    <S.ErrorContainer>
+      <S.ErrorMessage>{errorMessage}</S.ErrorMessage>
+      <S.ErrorText>Ou, clique no botão abaixo:</S.ErrorText>
+      <S.ErrorButton onClick={handleError}>Recarregar</S.ErrorButton>
+    </S.ErrorContainer>
   )
 }

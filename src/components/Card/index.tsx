@@ -1,4 +1,4 @@
-import styles from './Card.module.css'
+import * as S from './styles'
 
 interface CardProps {
   title: string
@@ -8,10 +8,10 @@ interface CardProps {
 
 export default function Card({title, thumbnail, genre}: CardProps) {
   return (
-    <div className={styles.card}>
-      <img className={styles.card__img} src={thumbnail} alt={`Imagem ${title}`} loading='lazy'/>
-      <h4 className={styles.card__title}>{title}</h4>
-      <p className={styles.card__genre}>{genre}</p>
-    </div>
+    <S.CardContainer>
+      <S.CardImg src={thumbnail} alt={`Imagem ${title}`} loading='lazy'/>
+      <S.CardTitle>{title}</S.CardTitle>
+      <S.CardGenre>{genre}</S.CardGenre>
+    </S.CardContainer>
   )
 }

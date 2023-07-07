@@ -9,7 +9,7 @@ export default function Nav() {
 
   const links: { route: string, name: string }[] = [{
     name: 'Início',
-    route: '/home'
+    route: '/'
   }, {
     name: 'Favoritos',
     route: '/favorites'

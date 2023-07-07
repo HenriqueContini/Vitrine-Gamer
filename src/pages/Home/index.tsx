@@ -60,8 +60,10 @@ export default function Home() {
   return (
     <S.HomeContainer>
       {bannerData && <Banner data={bannerData} />}
-      <Search data={data} setFilteredData={setFilteredData} />
-      <CardsGrid data={filteredData}/>
+      <S.Wrapper>
+        <CardsGrid data={filteredData} />
+        <Search data={data} filteredData={filteredData} setFilteredData={setFilteredData} />
+      </S.Wrapper>
     </S.HomeContainer>
   )
 }

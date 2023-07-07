@@ -6,9 +6,19 @@ export const HomeContainer = styled.main`
   gap: 40px;
   padding: 40px 20px;
   align-items: center;
+`
 
-  @media screen and (min-width: 1080px) {
-    padding: 80px;
-    gap: 60px;
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 40px;
+  padding: 40px 20px;
+  border-top: 1px solid var(--gray);
+  align-items: center;
+
+  @media screen and (min-width: 1000px){
+    display: grid;
+    grid-template-columns: 1fr 250px;
+    align-items: normal;
   }
 `

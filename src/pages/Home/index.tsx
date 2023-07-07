@@ -1,13 +1,13 @@
+import * as S from './styles'
 import { useEffect, useState } from 'react'
 import Banner from '../../components/Banner'
-import Card from '../../components/Card'
 import Search from '../../components/Search'
-import styles from './Home.module.css'
 import getGamesData from '../../services/gamesData'
 import ApiResponse from '../../interfaces/ApiResponse'
 import Loader from '../../components/Loader'
 import ApiError from '../../components/ApiError'
 import Game from '../../interfaces/Game'
+import CardsGrid from '../../components/CardsGrid'
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -54,21 +54,14 @@ export default function Home() {
     fetchData()
   }, [])
 
+  if (isLoading) return <Loader />
+  if (dataError.error) return <ApiError errorMessage={dataError.msg} handleError={handleErrorButton} />
+
   return (
-    <main className={styles.container}>
-      {isLoading ? <Loader /> :
-        <>
-          {!dataError.error && data ? <>
-            {bannerData && <Banner title={bannerData.title} thumbnail={bannerData.thumbnail} short_description={bannerData.short_description} />}
-            <Search data={data} setFilteredData={setFilteredData}/>
-            <section className={styles.card__container}>
-              {filteredData.map(game => <Card key={game.id} title={game.title} thumbnail={game.thumbnail} genre={game.genre} />)}
-            </section>
-          </> :
-            <ApiError errorMessage={dataError.msg} handleError={handleErrorButton} />
-          }
-        </>
-      }
-    </main>
+    <S.HomeContainer>
+      {bannerData && <Banner data={bannerData} />}
+      <Search data={data} setFilteredData={setFilteredData} />
+      <CardsGrid data={filteredData}/>
+    </S.HomeContainer>
   )
 }

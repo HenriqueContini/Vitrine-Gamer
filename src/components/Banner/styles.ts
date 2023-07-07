@@ -5,10 +5,11 @@ export const BannerContainer = styled.section`
   flex-direction: column;
   background-color: var(--light-background);
   border-radius: 15px;
-  max-width: 700px;
+  max-width: 400px;
 
   @media screen and (min-width: 600px){
     flex-direction: row;
+    max-width: 700px;
   }
 `
 
@@ -38,6 +39,7 @@ export const BannerArticle = styled.article`
 export const BannerTitle = styled.h2`
   font-weight: 400;
   color: var(--white);
+  text-align: center;
 `
 
 export const BannerText = styled.p`

@@ -1,8 +1,9 @@
 import { styled } from "styled-components";
 
-export const ErrorContainer = styled.section`
+export const ErrorContainer = styled.main`
   display: flex;
   flex-direction: column;
+  padding: 20px;
   gap: 40px;
   max-width: 500px;
   margin: 80px auto 0 auto;

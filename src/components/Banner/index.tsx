@@ -1,18 +1,17 @@
+import Game from '../../interfaces/Game'
 import * as S from './styles'
 
 interface BannerProps {
-  title: string
-  thumbnail: string
-  short_description: string
+  data: Game
 }
 
-export default function Banner({ title, thumbnail, short_description }: BannerProps) {
+export default function Banner({ data }: BannerProps) {
   return (
     <S.BannerContainer>
-      <S.BannerImg src={thumbnail} alt={`Banner: ${title}`} />
+      <S.BannerImg src={data.thumbnail} alt={`Banner: ${data.title}`} />
       <S.BannerArticle>
-        <S.BannerTitle>{title}</S.BannerTitle>
-        <S.BannerText>{short_description}</S.BannerText>
+        <S.BannerTitle>{data.title}</S.BannerTitle>
+        <S.BannerText>{data.short_description}</S.BannerText>
       </S.BannerArticle>
     </S.BannerContainer>
   )

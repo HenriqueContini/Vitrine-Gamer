@@ -2,7 +2,7 @@
 
 ### 🖥️ Projeto
 
-Este é o resultado de um desafio técnico utilizando React e TypeScript. 
+Este é o resultado de um desafio técnico utilizando React e TypeScript. <a href="https://vitrine-gamer.vercel.app/">Clique aqui para visualizar</a>
 
 O objetivo era criar uma aplicação web para apresentar uma lista de jogos fornecida por uma API.
 Porém, a API retornar alguns erros, e um dos objetivos é, justamente, saber lidar com eles.

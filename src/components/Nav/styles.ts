@@ -16,6 +16,10 @@ export const NavContainer = styled.nav`
     display: flex;
   }
 
+  & > a {
+    text-decoration: none;
+  }
+
   @media screen and (min-width: 600px) {
     padding: 0;
     height: auto;
@@ -47,7 +51,7 @@ export const CloseIcon = styled.div`
   }
 `
 
-export const NavLink = styled.a`
+export const LinkText = styled.p`
   text-decoration: none;
   font-size: 1rem;
   color: var(--white);
@@ -60,8 +64,11 @@ export const NavLink = styled.a`
   transition: .5s;
 
   &:hover {
-    color: var(--main-color);
     border-color: var(--main-color);
+  }
+
+  &.active {
+    color: var(--main-color);
   }
 `
 

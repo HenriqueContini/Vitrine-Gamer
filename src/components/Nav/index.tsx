@@ -1,14 +1,27 @@
 import { useState } from 'react'
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai'
 import * as S from './styles'
+import { Link, useLocation } from 'react-router-dom'
 
 export default function Nav() {
   const [showMenu, setShowMenu] = useState<boolean>(false)
+  const { pathname } = useLocation()
+
+  const links: { route: string, name: string }[] = [{
+    name: 'Início',
+    route: '/home'
+  }, {
+    name: 'Favoritos',
+    route: '/favorites'
+  }, {
+    name: 'Login',
+    route: '/auth'
+  }]
 
   const handleMenu = () => {
     setShowMenu(showMenu ? false : true)
   }
-  
+
   return (
     <>
       <S.NavContainer className={showMenu ? 'active' : ''}>
@@ -16,9 +29,12 @@ export default function Nav() {
           <AiOutlineClose />
         </S.CloseIcon>
 
-        <S.NavLink href="#"><p>Início</p></S.NavLink>
-        <S.NavLink href="#"><p>Favoritos</p></S.NavLink>
-        <S.NavLink href="#"><p>Perfil</p></S.NavLink>
+        {links.map((item, index) =>
+          <Link key={index} to={item.route}>
+            <S.LinkText className={pathname === item.route ? 'active' : ''}>{item.name}</S.LinkText>
+          </Link>
+        )}
+
       </S.NavContainer>
 
       <S.MenuIcon onClick={() => handleMenu()}>

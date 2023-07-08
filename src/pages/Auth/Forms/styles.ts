@@ -10,6 +10,9 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  max-width: 300px;
+  margin: auto;
+  width: 100%;
 `
 
 export const Label = styled.label`
@@ -31,6 +34,12 @@ export const Input = styled.input`
   &:focus {
     border-color: var(--main-color);
   }
+`
+
+export const ErrorSpan = styled.span`
+  color: red;
+  font-size: 1rem;
+  text-align: center;
 `
 
 export const Button = styled.button`

@@ -1,11 +1,20 @@
 import * as S from './styles'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import vg1 from '../../assets/videogame1.png'
 import LoginForm from './Forms/LoginForm'
 import SignUpForm from './Forms/SignUpForm'
+import logout from '../../services/logout'
 
 export default function Auth() {
   const [showLogin, setShowLogin] = useState<boolean>(true)
+
+  const clearUser = async () => {
+    await logout()
+  }
+
+  useEffect(() => {
+    clearUser()
+  }, [])
 
   return (
     <S.Main>

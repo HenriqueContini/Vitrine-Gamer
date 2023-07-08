@@ -68,7 +68,7 @@ export default function Search({ data, filteredData, setFilteredData }: SearchPr
       <S.SearchWrapper>
         <S.SearchLabel htmlFor='genre'>Gênero</S.SearchLabel>
         <S.SearchGenre id='genre' value={selectedGenre} onChange={(e: ChangeEvent<HTMLSelectElement>) => filterGenre(e.target.value)}>
-          <option value="default">{selectedGenre === 'default' ? "Selecione o gênero" : "Limpar seleção" }</option>
+          <option value="default">Todos</option>
           {genres.map((item, index) => <option key={index} value={item} >{item}</option>)}
         </S.SearchGenre>
       </S.SearchWrapper>

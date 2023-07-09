@@ -1,13 +1,13 @@
 import { signOut } from "firebase/auth";
 import { auth } from "../configs/firebaseConfig";
 
-async function checkUser() {
+async function checkUser(): Promise<string> {
   const user = auth.currentUser
   if (user) {
     return user.uid
   }
 
-  return null
+  return ''
 }
 
 async function logout (): Promise<void> {

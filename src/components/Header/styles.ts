@@ -7,7 +7,7 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
   align-items: center;
 
-  @media screen and (min-width: 600px){
+  @media screen and (min-width: 800px){
     padding: 20px 50px;
   }
 `

@@ -16,7 +16,7 @@ export const Cards = styled.section`
     }
   }
 
-  @media screen and (min-width: 1080px) {
+  @media screen and (min-width: 960px) {
     & .scroller {
       gap: 50px;
       max-width: 1400px;

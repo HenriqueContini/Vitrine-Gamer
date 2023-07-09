@@ -1,17 +1,24 @@
+import Game from '../../interfaces/Game'
 import * as S from './styles'
+import {BsFillHeartbreakFill, BsFillHeartFill} from 'react-icons/bs'
 
 interface CardProps {
-  title: string
-  thumbnail: string
-  genre: string
+  data: Game
 }
 
-export default function Card({title, thumbnail, genre}: CardProps) {
+export default function Card({ data }: CardProps) {
   return (
     <S.CardContainer>
-      <S.CardImg src={thumbnail} alt={`Imagem ${title}`} loading='lazy'/>
-      <S.CardTitle>{title}</S.CardTitle>
-      <S.CardGenre>{genre}</S.CardGenre>
+      <S.RowWrapper>
+        <S.CardTitle>{data.title}</S.CardTitle>
+        <S.Favorite>
+          <BsFillHeartFill />
+        </S.Favorite>
+      </S.RowWrapper>
+      <S.CardImg src={data.thumbnail} alt={`Imagem ${data.title}`} loading='lazy' />
+      <S.RowWrapper>
+        <S.CardText>{data.genre} - {new Date(data.release_date).getFullYear()}</S.CardText>
+      </S.RowWrapper>
     </S.CardContainer>
   )
 }

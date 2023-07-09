@@ -32,7 +32,7 @@ export const ClearButton = styled.div`
   cursor: pointer;
 
   &:hover {
-    color: red;
+    color: var(--red);
   }
 
   & > svg {

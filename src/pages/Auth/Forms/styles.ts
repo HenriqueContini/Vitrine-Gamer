@@ -37,7 +37,7 @@ export const Input = styled.input`
 `
 
 export const ErrorSpan = styled.span`
-  color: red;
+  color: var(--red);
   font-size: 1rem;
   text-align: center;
 `

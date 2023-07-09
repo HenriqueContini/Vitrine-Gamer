@@ -52,7 +52,7 @@ export default function CardsGrid({ data }: CardsGridProps) {
     <S.Cards>
       {displayData && splittedData &&
         <InfiniteScroll className='scroller' loadMore={() => loadMoreData()} hasMore={currentData + 1 < splittedData.length} loader={<Loader key={0}/>}>
-          {displayData.map(game => <Card key={game.id} title={game.title} thumbnail={game.thumbnail} genre={game.genre} />)}
+          {displayData.map(game => <Card key={game.id} data={game} />)}
         </InfiniteScroll >
       }
     </S.Cards>

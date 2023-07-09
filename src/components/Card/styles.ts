@@ -30,12 +30,12 @@ export const RowWrapper = styled.div`
   align-items: center;
 `
 
-export const Favorite = styled.div`
+export const Favorite = styled.div<{$favorite: boolean}>`
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
-  color: var(--gray);
+  color: ${(props) => props.$favorite ? 'var(--red)' : 'var(--gray)'};
 
   transition: 0.5s;
 

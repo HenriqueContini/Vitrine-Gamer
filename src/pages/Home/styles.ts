@@ -5,7 +5,6 @@ export const HomeContainer = styled.main`
   flex-direction: column;
   gap: 40px;
   padding: 40px 20px;
-  align-items: center;
 `
 
 export const Wrapper = styled.div`

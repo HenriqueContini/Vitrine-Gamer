@@ -21,4 +21,6 @@ async function login(email: string, password: string): Promise<FormResponse> {
   }
 }
 
+/* auth.currentUser.uid => Salva no banco de dados e no listener*/
+
 export default login

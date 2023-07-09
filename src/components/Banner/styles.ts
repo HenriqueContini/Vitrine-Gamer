@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const BannerContainer = styled.section`
   display: flex;
   flex-direction: column;
+  align-self: center;
   background-color: var(--light-background);
   border-radius: 15px;
   max-width: 400px;

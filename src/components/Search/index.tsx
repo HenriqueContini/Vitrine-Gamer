@@ -1,6 +1,7 @@
 import * as S from './styles'
 import { useState, useEffect, Dispatch, SetStateAction, ChangeEvent } from 'react'
 import Game from '../../interfaces/Game'
+import filter from '../../services/filter'
 import { IoClose } from 'react-icons/io5'
 
 interface SearchProps {
@@ -11,36 +12,24 @@ interface SearchProps {
 
 export default function Search({ data, filteredData, setFilteredData }: SearchProps) {
   const [inputGameValue, setInputGameValue] = useState<string>('')
-  const [selectedGenre, setSelectedGenre] = useState<string>('default')
+  const [selectedGenre, setSelectedGenre] = useState<string>('all')
   const [genres, setGenres] = useState<string[]>([])
 
   const filterGame = (value: string) => {
     setInputGameValue(value)
-    setFilteredData(data.filter(game => game.title.toUpperCase().includes(value.toUpperCase())))
-    setSelectedGenre('default')
+    setSelectedGenre('all')
+    setFilteredData(filter(data, value))
   }
 
   const clearSearch = () => {
-    setInputGameValue('')
     setFilteredData(data)
-    setSelectedGenre('default')
+    setInputGameValue('')
+    setSelectedGenre('all')
   }
 
   const filterGenre = (genre: string) => {
     setSelectedGenre(genre)
-
-    if (genre === 'default') {
-      return filterGame(inputGameValue)
-    }
-
-    if (selectedGenre !== 'default' && genre !== 'default') {
-      filterGame(inputGameValue)
-      const newArr = data.filter(item => item.genre === genre)
-      return setFilteredData(newArr)
-    }
-
-    const newArr = filteredData.filter(item => item.genre === genre)
-    return setFilteredData(newArr)
+    setFilteredData(filter(data, inputGameValue, genre))
   }
 
   useEffect(() => {
@@ -68,7 +57,7 @@ export default function Search({ data, filteredData, setFilteredData }: SearchPr
       <S.SearchWrapper>
         <S.SearchLabel htmlFor='genre'>Gênero</S.SearchLabel>
         <S.SearchGenre id='genre' value={selectedGenre} onChange={(e: ChangeEvent<HTMLSelectElement>) => filterGenre(e.target.value)}>
-          <option value="default">Todos</option>
+          <option value="all">Todos</option>
           {genres.map((item, index) => <option key={index} value={item} >{item}</option>)}
         </S.SearchGenre>
       </S.SearchWrapper>

@@ -1,6 +1,6 @@
 import Game from '../../interfaces/Game'
 import * as S from './styles'
-import {BsFillHeartbreakFill, BsFillHeartFill} from 'react-icons/bs'
+import {BsFillHeartFill} from 'react-icons/bs'
 
 interface CardProps {
   data: Game

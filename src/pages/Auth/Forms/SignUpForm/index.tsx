@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import * as S from '../styles'
 import { useNavigate } from 'react-router-dom';
 import FormResponse from '../../../../interfaces/FormResponse';
-import signUp from '../../../../services/SignUp';
+import signUp from '../../../../services/signUp';
 
 interface SignUpForm {
   setShowLogin: (value: boolean) => void

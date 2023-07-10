@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useState } from 'react'
 import Game from '../../interfaces/Game'
-import { addFavorite } from '../../services/favorite'
+import { addFavorite, deleteFavorite } from '../../services/favorite'
 import * as S from './styles'
 import { checkUser } from '../../services/user'
 import { AiFillHeart, AiFillStar } from 'react-icons/ai'
@@ -20,10 +20,18 @@ export default function Card({ data, setShowError }: CardProps) {
       setShowError(true)
     }
 
-    let response = await addFavorite(data)
+    if (!isFavorite) {
+      let adding = await addFavorite(data)
 
-    if (!response.error) {
-      setIsFavorite(true)
+      if (!adding.error) {
+        setIsFavorite(true)
+      }
+    } else {
+      let deleting = await deleteFavorite(data)
+
+      if (!deleting.error) {
+        setIsFavorite(false)
+      }
     }
   }
 

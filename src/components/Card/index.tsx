@@ -9,7 +9,7 @@ interface CardProps {
 }
 
 export default function Card({ data }: CardProps) {
-  const [isFavorite, setIsFavorite] = useState<boolean>(false)
+  const [isFavorite, setIsFavorite] = useState<boolean>(data.isFavorite ? true : false)
 
   const handleFavorite = async () => {
     let response = await addFavorite(data)

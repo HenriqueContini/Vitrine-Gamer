@@ -26,7 +26,6 @@ export default function Nav() {
 
   const handleUser = async () => {
     let user = await checkUser()
-    console.log(user)
 
     if (user) {
       return setHasUser(true)
@@ -37,7 +36,7 @@ export default function Nav() {
 
   useEffect(() => {
     handleUser()
-  }, [])
+  }, [pathname])
 
   return (
     <>

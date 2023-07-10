@@ -11,16 +11,16 @@ import CardsGrid from '../../components/CardsGrid'
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [dataError, setDataError] = useState<{ error: boolean, msg: string }>({ error: false, msg: '' })
+  const [dataError, setDataError] = useState<{ error: boolean, msg?: string }>({ error: false })
   const [data, setData] = useState<Game[]>([])
   const [filteredData, setFilteredData] = useState<Game[]>([])
   const [bannerData, setBannerData] = useState<Game>()
 
   const fetchData = async () => {
-    const response: ApiResponse | undefined = await getGamesData()
+    const response: ApiResponse = await getGamesData()
 
     if (response.data) {
-      setDataError({ error: false, msg: '' })
+      setDataError({ error: false })
       setData(response.data)
       setFilteredData(response.data)
 
@@ -30,7 +30,7 @@ export default function Home() {
       setData([])
       setDataError({
         error: response.error,
-        msg: response.msg!
+        msg: response.msg
       })
     }
 
@@ -49,7 +49,7 @@ export default function Home() {
 
   useEffect(() => {
     setIsLoading(true)
-    setDataError({ error: false, msg: '' })
+    setDataError({ error: false })
     setData([])
     fetchData()
   }, [])

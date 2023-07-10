@@ -1,18 +1,28 @@
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import Game from '../../interfaces/Game'
 import { addFavorite } from '../../services/favorite'
 import * as S from './styles'
 import {BsFillHeartFill} from 'react-icons/bs'
+import { checkUser } from '../../services/user'
 
 interface CardProps {
   data: Game
+  setShowError: Dispatch<SetStateAction<boolean>>
 }
 
-export default function Card({ data }: CardProps) {
+export default function Card({ data, setShowError }: CardProps) {
   const [isFavorite, setIsFavorite] = useState<boolean>(data.isFavorite ? true : false)
+  
 
   const handleFavorite = async () => {
+    let user = await checkUser()
+
+    if (!user) {
+      setShowError(true)
+    }
+
     let response = await addFavorite(data)
+
     if (!response.error) {
       setIsFavorite(true)
     }

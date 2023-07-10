@@ -4,6 +4,7 @@ import Game from '../../interfaces/Game'
 import Card from '../Card'
 import * as S from './styles'
 import Loader from '../Loader';
+import ModalError from '../ModalError';
 
 interface CardsGridProps {
   data: Game[]
@@ -13,6 +14,7 @@ export default function CardsGrid({ data }: CardsGridProps) {
   const [splittedData, setSplittedData] = useState<Game[][]>()
   const [displayData, setDisplayData] = useState<Game[]>([])
   const [currentData, setCurrentData] = useState<number>(0)
+  const [showError, setShowError] = useState<boolean>(false)
 
   const splitData = (len: number) => {
     let parts = [], i = 0, n = data.length
@@ -49,12 +51,14 @@ export default function CardsGrid({ data }: CardsGridProps) {
   }, [splittedData])
 
   return (
-    <S.Cards>
+    <S.Cards $blur={showError}>
       {displayData && splittedData &&
-        <InfiniteScroll className='scroller' loadMore={() => loadMoreData()} hasMore={currentData + 1 < splittedData.length} loader={<Loader key={0}/>}>
-          {displayData.map(game => <Card key={game.id} data={game} />)}
+        <InfiniteScroll className={`scroller`} loadMore={() => loadMoreData()} hasMore={currentData + 1 < splittedData.length} loader={<Loader key={0} />}>
+          {displayData.map(game => <Card setShowError={setShowError} key={game.id} data={game} />)}
         </InfiniteScroll >
       }
+
+      {showError && <ModalError msg='É necessário estar logado' onClick={() => setShowError(false)} />}
     </S.Cards>
   )
 }

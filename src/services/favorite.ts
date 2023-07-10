@@ -31,10 +31,12 @@ async function getAllFavorites(): Promise<ApiResponse>{
 async function addFavorite(game: Game, stars: number = 0) {
   try {
     const user = await checkUser()
-    if (user) {
-      await addDoc(collection(db, tableName), {...game, user: user, isFavorite: true, stars: stars});
-    }
 
+    if (!user) {
+      return {error: true, msg: 'É necessário estar logado para poder curtir!'}
+    }
+    
+    await addDoc(collection(db, tableName), {...game, user: user, isFavorite: true, stars: stars});
     return {error: false}
   } catch (error) {
     console.log(error)

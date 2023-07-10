@@ -1,10 +1,12 @@
 import { styled } from "styled-components";
 
-export const Cards = styled.section`
+export const Cards = styled.section<{ $blur: boolean }>`
   & .scroller {
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    filter: ${(props) => props.$blur ? 'blur(15px)' : 'none'};
   }
 
   @media screen and (min-width: 600px) {

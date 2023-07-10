@@ -1,6 +1,7 @@
 import axios, { AxiosResponse, isAxiosError } from "axios"
 import Game from "../interfaces/Game"
 import ApiResponse from "../interfaces/ApiResponse"
+import { getAllFavorites } from "./favorite"
 
 const URL = 'https://games-test-api-81e9fb0d564a.herokuapp.com/api/data'
 const statusArr = [500, 502, 503, 504, 507, 508, 509]
@@ -13,7 +14,22 @@ async function getGamesData(): Promise<ApiResponse> {
       },
       timeout: 5000
     })
-    return {data: response.data, error: false}
+
+    const favorites = await getAllFavorites()
+
+    let data: Game[] = response.data
+
+    if (favorites.data) {
+      favorites.data.map((favorite) => {
+        data.map((game) => {
+          if (favorite.id === game.id) {
+            game.isFavorite = favorite.isFavorite
+          }
+        })
+      })
+    }
+
+    return {data: data, error: false}
   } catch (error) {
     if (isAxiosError(error)) {
       if(error.code === 'ECONNABORTED') {

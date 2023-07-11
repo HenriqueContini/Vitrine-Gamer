@@ -57,6 +57,14 @@ export const Button = styled.button`
     background-color: var(--main-color);
     color: var(--white);
   }
+
+  & > .loader {
+    display: flex;
+    max-width: 20px;
+    max-height: 20px;
+    margin-inline: auto;
+    align-items: center;
+  }
 `
 
 export const Text = styled.p`

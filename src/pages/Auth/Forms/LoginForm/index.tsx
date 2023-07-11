@@ -3,19 +3,22 @@ import * as S from '../styles'
 import { useNavigate } from 'react-router-dom';
 import login from '../../../../services/login';
 import FormResponse from '../../../../interfaces/FormResponse';
+import { TailSpin } from 'react-loader-spinner';
 
 interface LoginFormProps {
   setShowLogin: (value: boolean) => void
 }
 
 export default function LoginForm({setShowLogin} : LoginFormProps) {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const navigate = useNavigate()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [errorMsg, setErrorMsg] = useState<string | undefined>('')
 
   const handleForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setIsLoading(true)
     setErrorMsg('')
 
     const result: FormResponse = await login(email, password)
@@ -23,6 +26,7 @@ export default function LoginForm({setShowLogin} : LoginFormProps) {
     setEmail('')
     setPassword('')
     
+    setIsLoading(false)
     if (result.error) {
       return setErrorMsg(result.msg)
     }
@@ -40,7 +44,7 @@ export default function LoginForm({setShowLogin} : LoginFormProps) {
         <S.Input id='password' type='password' placeholder='************' value={password} onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} required />
         {errorMsg && <S.ErrorSpan>{errorMsg}</S.ErrorSpan>}
 
-        <S.Button type='submit'>Login</S.Button>
+        <S.Button type='submit'>{isLoading ? <TailSpin color='#FFFFFF' wrapperClass="loader"/> : 'Login'} </S.Button>
       </S.Form>
       <S.Text>Não possui conta? <S.Span onClick={() => setShowLogin(false)}>Fazer cadastro!</S.Span></S.Text>
     </>

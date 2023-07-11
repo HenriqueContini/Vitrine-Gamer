@@ -1,7 +1,7 @@
 import axios, { AxiosResponse, isAxiosError } from "axios"
 import Game from "../interfaces/Game"
 import ApiResponse from "../interfaces/ApiResponse"
-import { getAllFavorites } from "./favorite"
+import { getAllData } from "./firebaseData"
 
 const URL = 'https://games-test-api-81e9fb0d564a.herokuapp.com/api/data'
 const statusArr = [500, 502, 503, 504, 507, 508, 509]
@@ -15,15 +15,16 @@ async function getGamesData(): Promise<ApiResponse> {
       timeout: 5000
     })
 
-    const favorites = await getAllFavorites()
+    const firebaseGames = await getAllData()
 
     let data: Game[] = response.data
 
-    if (favorites.data) {
-      favorites.data.map((favorite) => {
+    if (firebaseGames.data) {
+      firebaseGames.data.map((frGame) => {
         data.map((game) => {
-          if (favorite.id === game.id) {
-            game.isFavorite = favorite.isFavorite
+          if (frGame.id === game.id) {
+            game.isFavorite = frGame.isFavorite
+            game.stars = frGame.stars
           }
         })
       })

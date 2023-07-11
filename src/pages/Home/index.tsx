@@ -47,6 +47,10 @@ export default function Home() {
     fetchData()
   }
 
+  const updateData = (newGame: Game) => {
+    setData(prev => prev.map((game) => game.id === newGame.id ? {...game, isFavorite: newGame.isFavorite, stars: newGame.stars} : {...game}))
+  }
+
   useEffect(() => {
     setIsLoading(true)
     setDataError({ error: false })
@@ -61,7 +65,7 @@ export default function Home() {
     <S.HomeContainer>
       {bannerData && <Banner data={bannerData} />}
       <S.Wrapper>
-        <CardsGrid data={filteredData} />
+        <CardsGrid data={filteredData} updateData={updateData}/>
         <Search data={data} filteredData={filteredData} setFilteredData={setFilteredData} />
       </S.Wrapper>
     </S.HomeContainer>

@@ -1,17 +1,21 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import Game from '../../interfaces/Game'
 import { addFavorite, deleteFavorite } from '../../services/favorite'
 import * as S from './styles'
 import { checkUser } from '../../services/user'
-import { AiFillHeart, AiFillStar } from 'react-icons/ai'
+import { AiFillHeart } from 'react-icons/ai'
+import { addStars } from '../../services/star'
+import Stars from '../Stars'
 
 interface CardProps {
   data: Game
   setShowError: Dispatch<SetStateAction<boolean>>
+  updateData: (newGame: Game) => void
 }
 
-export default function Card({ data, setShowError }: CardProps) {
+export default function Card({ data, setShowError, updateData }: CardProps) {
   const [isFavorite, setIsFavorite] = useState<boolean>(data.isFavorite ? true : false)
+  const [stars, setStars] = useState<number>(data.stars ? data.stars : 0)
 
   const handleFavorite = async () => {
     let user = await checkUser()
@@ -35,6 +39,33 @@ export default function Card({ data, setShowError }: CardProps) {
     }
   }
 
+  const handleStars = async (nStars: number) => {
+    let user = await checkUser()
+
+    if (!user) {
+      setShowError(true)
+    }
+
+    let adding = await addStars(data, nStars)
+    if (!adding.error) {
+      setStars(nStars)
+    }
+  }
+
+  const handleUpdate = async () => {
+    let newGame = {
+      ...data,
+      stars: stars,
+      isFavorite: isFavorite
+    }
+
+    updateData(newGame)
+  }
+
+  useEffect(() => {
+    handleUpdate()
+  }, [isFavorite, stars])
+
   return (
     <S.CardContainer>
       <S.RowWrapper>
@@ -46,13 +77,7 @@ export default function Card({ data, setShowError }: CardProps) {
       <S.CardImg src={data.thumbnail} alt={`Imagem ${data.title}`} loading='lazy' />
       <S.RowWrapper>
         <S.CardText>{data.genre} - {new Date(data.release_date).getFullYear()}</S.CardText>
-        <S.StarContainer>
-          <S.Star><AiFillStar /></S.Star>
-          <S.Star><AiFillStar /></S.Star>
-          <S.Star><AiFillStar /></S.Star>
-          <S.Star><AiFillStar /></S.Star>
-          <S.Star><AiFillStar /></S.Star>
-        </S.StarContainer>
+        <Stars handleStars={handleStars} stars={stars} />
       </S.RowWrapper>
     </S.CardContainer>
   )

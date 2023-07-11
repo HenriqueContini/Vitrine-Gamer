@@ -47,7 +47,7 @@ export default function Favorite() {
     <S.FavoriteContainer>
       {data.length > 0 ?
         <S.Wrapper>
-          <CardsGrid data={filteredData} />
+          <CardsGrid data={filteredData} updateData={fetchData}/>
           <Search data={data} filteredData={filteredData} setFilteredData={setFilteredData} />
         </S.Wrapper>
 

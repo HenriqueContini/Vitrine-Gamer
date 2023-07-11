@@ -60,24 +60,3 @@ export const Favorite = styled.div<{$favorite: boolean}>`
     color: var(--white);
   }
 `
-
-export const StarContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 5px;
-`
-
-export const Star = styled.div`
-  cursor: pointer;
-  display: flex;
-  font-size: 1rem;
-  color: yellow;
-  cursor: pointer;
-
-  transition: 0.5s;
-  
-  &:hover {
-    color: var(--white);
-  }
-`

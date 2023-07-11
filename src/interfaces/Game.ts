@@ -8,7 +8,7 @@ interface Game {
   short_description: string
   release_date: string
   isFavorite?: boolean
-  starts?: number
+  stars?: number
 }
 
 export default Game

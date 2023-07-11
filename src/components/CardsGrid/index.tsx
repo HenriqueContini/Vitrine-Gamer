@@ -7,10 +7,11 @@ import Loader from '../Loader';
 import ModalError from '../ModalError';
 
 interface CardsGridProps {
+  updateData: (newGame: Game) => void
   data: Game[]
 }
 
-export default function CardsGrid({ data }: CardsGridProps) {
+export default function CardsGrid({ data, updateData }: CardsGridProps) {
   const [splittedData, setSplittedData] = useState<Game[][]>()
   const [displayData, setDisplayData] = useState<Game[]>([])
   const [currentData, setCurrentData] = useState<number>(0)
@@ -54,7 +55,7 @@ export default function CardsGrid({ data }: CardsGridProps) {
     <S.Cards $blur={showError}>
       {displayData && splittedData &&
         <InfiniteScroll className={`scroller`} loadMore={() => loadMoreData()} hasMore={currentData + 1 < splittedData.length} loader={<Loader key={0} />}>
-          {displayData.map(game => <Card setShowError={setShowError} key={game.id} data={game} />)}
+          {displayData.map(game => <Card setShowError={setShowError} key={game.id} data={game} updateData={updateData} />)}
         </InfiniteScroll >
       }
 

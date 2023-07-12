@@ -3,6 +3,7 @@ import App from "./App";
 import Home from "./pages/Home";
 import Auth from "./pages/Auth";
 import Favorite from "./pages/Favorite";
+import Page404 from "./pages/Error404";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,9 @@ const router = createBrowserRouter([
         element: <Favorite />
       }
     ]
+  }, {
+    path: '*',
+    element: <Page404 />
   }
 ])
 

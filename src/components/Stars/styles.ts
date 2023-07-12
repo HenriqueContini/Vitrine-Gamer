@@ -12,7 +12,6 @@ export const Star = styled.div<{$star: boolean}>`
   display: flex;
   font-size: 1rem;
   color: ${(props) => props.$star ? 'yellow' : 'var(--gray)'};
-  cursor: pointer;
 
   transition: 0.5s;
   

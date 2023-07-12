@@ -1,6 +1,10 @@
 import { styled } from "styled-components";
 
 export const Cards = styled.section<{ $blur: boolean }>`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
   & .scroller {
     display: flex;
     flex-direction: column;

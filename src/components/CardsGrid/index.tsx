@@ -1,27 +1,29 @@
-import { useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroller';
 import Game from '../../interfaces/Game'
 import Card from '../Card'
 import * as S from './styles'
 import Loader from '../Loader';
 import ModalError from '../ModalError';
+import SortGrid from '../SortGrid';
 
 interface CardsGridProps {
   updateData: (newGame: Game) => void
-  data: Game[]
+  setFilteredData: Dispatch<SetStateAction<Game[]>>
+  filteredData: Game[]
 }
 
-export default function CardsGrid({ data, updateData }: CardsGridProps) {
+export default function CardsGrid({ filteredData, updateData, setFilteredData }: CardsGridProps) {
   const [splittedData, setSplittedData] = useState<Game[][]>()
   const [displayData, setDisplayData] = useState<Game[]>([])
   const [currentData, setCurrentData] = useState<number>(0)
   const [showError, setShowError] = useState<boolean>(false)
 
   const splitData = (len: number) => {
-    let parts = [], i = 0, n = data.length
+    let parts = [], i = 0, n = filteredData.length
 
     while (i < n) {
-      parts.push(data.slice(i, i += len))
+      parts.push(filteredData.slice(i, i += len))
     }
 
     return parts
@@ -41,9 +43,10 @@ export default function CardsGrid({ data, updateData }: CardsGridProps) {
   }
 
   useEffect(() => {
+    console.log(filteredData.length)
     setSplittedData(splitData(12))
     setCurrentData(0)
-  }, [data])
+  }, [filteredData])
 
   useEffect(() => {
     if (splittedData) {
@@ -54,9 +57,12 @@ export default function CardsGrid({ data, updateData }: CardsGridProps) {
   return (
     <S.Cards $blur={showError}>
       {displayData && splittedData &&
-        <InfiniteScroll className={`scroller`} loadMore={() => loadMoreData()} hasMore={currentData + 1 < splittedData.length} loader={<Loader key={0} />}>
-          {displayData.map(game => <Card setShowError={setShowError} key={game.id} data={game} updateData={updateData} />)}
-        </InfiniteScroll >
+        <>
+          <SortGrid filteredData={filteredData} setFilteredData={setFilteredData}/>
+          <InfiniteScroll className={`scroller`} loadMore={() => loadMoreData()} hasMore={currentData + 1 < splittedData.length} loader={<Loader key={0} />}>
+            {displayData.map(game => <Card setShowError={setShowError} key={game.id} data={game} updateData={updateData} />)}
+          </InfiniteScroll >
+        </>
       }
 
       {showError && <ModalError msg='É necessário estar logado' onClick={() => setShowError(false)} />}

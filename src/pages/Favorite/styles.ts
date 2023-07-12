@@ -12,7 +12,6 @@ export const Wrapper = styled.div`
   flex-direction: column-reverse;
   gap: 40px;
   padding: 40px 20px;
-  border-top: 1px solid var(--gray);
   align-items: center;
 
   @media screen and (min-width: 1000px){

@@ -46,7 +46,7 @@ export default function Nav() {
         </S.CloseIcon>
 
         {links.map((item, index) =>
-          <Link key={index} to={item.route}>
+          <Link key={index} to={item.route} onClick={() => setShowMenu(false)}>
             <S.LinkText className={pathname === item.route ? 'active' : ''}>{item.name}</S.LinkText>
           </Link>
         )}

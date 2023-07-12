@@ -65,7 +65,7 @@ export default function Home() {
     <S.HomeContainer>
       {bannerData && <Banner data={bannerData} />}
       <S.Wrapper>
-        <CardsGrid data={filteredData} updateData={updateData}/>
+        <CardsGrid filteredData={filteredData} setFilteredData={setFilteredData} updateData={updateData}/>
         <Search data={data} filteredData={filteredData} setFilteredData={setFilteredData} />
       </S.Wrapper>
     </S.HomeContainer>

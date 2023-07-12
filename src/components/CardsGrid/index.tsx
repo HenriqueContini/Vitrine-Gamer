@@ -16,7 +16,7 @@ interface CardsGridProps {
 export default function CardsGrid({ filteredData, updateData, setFilteredData }: CardsGridProps) {
   const [splittedData, setSplittedData] = useState<Game[][]>()
   const [displayData, setDisplayData] = useState<Game[]>([])
-  const [currentData, setCurrentData] = useState<number>(0)
+  const [currentIndexData, setCurrentIndexData] = useState<number>(0)
   const [showError, setShowError] = useState<boolean>(false)
 
   const splitData = (len: number) => {
@@ -31,11 +31,11 @@ export default function CardsGrid({ filteredData, updateData, setFilteredData }:
 
   const loadMoreData = () => {
     if (splittedData) {
-      let newIndex = currentData + 1
+      let newIndex = currentIndexData + 1
 
       if (newIndex < splittedData.length) {
         let newData = splittedData[newIndex]
-        setCurrentData(newIndex)
+        setCurrentIndexData(newIndex)
 
         setDisplayData(prev => [...prev, ...newData])
       }
@@ -43,9 +43,8 @@ export default function CardsGrid({ filteredData, updateData, setFilteredData }:
   }
 
   useEffect(() => {
-    console.log(filteredData.length)
     setSplittedData(splitData(12))
-    setCurrentData(0)
+    setCurrentIndexData(0)
   }, [filteredData])
 
   useEffect(() => {
@@ -58,8 +57,8 @@ export default function CardsGrid({ filteredData, updateData, setFilteredData }:
     <S.Cards $blur={showError}>
       {displayData && splittedData &&
         <>
-          <SortGrid filteredData={filteredData} setFilteredData={setFilteredData}/>
-          <InfiniteScroll className={`scroller`} loadMore={() => loadMoreData()} hasMore={currentData + 1 < splittedData.length} loader={<Loader key={0} />}>
+          <SortGrid filteredData={filteredData} setFilteredData={setFilteredData} />
+          <InfiniteScroll className={`scroller`} loadMore={() => loadMoreData()} hasMore={currentIndexData + 1 < splittedData.length} loader={<Loader key={0} />}>
             {displayData.map(game => <Card setShowError={setShowError} key={game.id} data={game} updateData={updateData} />)}
           </InfiniteScroll >
         </>

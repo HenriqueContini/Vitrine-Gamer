@@ -33,6 +33,10 @@ export default function Favorite() {
     setIsLoading(false)
   }
 
+  const updateData = (newGame: Game) => {
+    setData(prev => prev.map((game) => game.id === newGame.id ? {...game, isFavorite: newGame.isFavorite, stars: newGame.stars} : {...game}))
+  }
+
   useEffect(() => {
     setIsLoading(true)
     setDataError({ error: false, msg: '' })
@@ -47,7 +51,7 @@ export default function Favorite() {
     <S.FavoriteContainer>
       {data.length > 0 ?
         <S.Wrapper>
-          <CardsGrid filteredData={filteredData} setFilteredData={setFilteredData} updateData={fetchData}/>
+          <CardsGrid filteredData={filteredData} setFilteredData={setFilteredData} updateData={updateData}/>
           <Search data={data} filteredData={filteredData} setFilteredData={setFilteredData} />
         </S.Wrapper>
 

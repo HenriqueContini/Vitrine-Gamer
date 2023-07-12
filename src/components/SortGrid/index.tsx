@@ -1,5 +1,5 @@
 import * as S from './styles'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { AiFillStar } from 'react-icons/ai'
 import { HiArrowNarrowDown, HiArrowNarrowUp } from 'react-icons/hi'
 import Game from '../../interfaces/Game'
@@ -13,6 +13,7 @@ interface OrderGridProps {
 export default function SortGrid({ filteredData, setFilteredData }: OrderGridProps) {
   const [order, setOrder] = useState<boolean>(false)
   const [orderBy, setOrderBy] = useState<string>('ASC')
+  const [lastLength, setLastLength] = useState<number>(filteredData.length)
 
   const handleOrder = async () => {
     setOrderBy(prev => prev === 'ASC' ? 'DESC' : 'ASC')
@@ -22,6 +23,13 @@ export default function SortGrid({ filteredData, setFilteredData }: OrderGridPro
       return setOrder(true)
     }
   }
+
+  useEffect(() => {
+    if(lastLength !== filteredData.length) {
+      setOrder(false)
+      setLastLength(filteredData.length)
+    }
+  }, [filteredData])
 
   return (
     <S.OrderContainer>

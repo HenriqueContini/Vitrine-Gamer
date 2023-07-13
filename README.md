@@ -7,20 +7,28 @@ Este é o resultado de um desafio técnico utilizando React e TypeScript. <a hre
 O objetivo era criar uma aplicação web para apresentar uma lista de jogos fornecida por uma API.
 Porém, a API retornar alguns erros, e um dos objetivos é, justamente, saber lidar com eles.
 
+2º Etapa: Durante a segunda etapa do teste, foi necessário realizar algumas modificações, onde, agora, é possível favoritar e avaliar um jogo.
+
 ## 📝 Descrição
 
-Ao entrar na tela principal, será possível ver um banner que é autalizado automaticamente e uma lista de jogos. É possível filtrar a lista de jogos pelo nome e pelo tipo de jogo.
+Ao entrar na tela principal, será possível ver um banner que é atualizado automaticamente e uma lista de jogos. É possível filtrar a lista de jogos pelo nome e pelo tipo de jogo.
 
-Para criar a aplicação, foi utilizado o conceito de mobile first, que a tornou totalmente responsiva.
+A aplicação conta com uma tela de login / cadastro que foi feita utilizando o Firebase Auth.
+Os jogos favoritados e avaliados são salvos no Firestore com base no UID do usuário.
+
+Durante a 2º fase do projeto, foi feita uma nova UI com o Styled Components. Também, foi utilizado o princípio de mobile-first para garantir a responsividade do site.
 
 ## ⚙️ Tecnologias
 
-- React
 - TypeScript
-- Axios
+- React
 - React Icons
 - React loader spinner
-- CSS Modules
+- React Router Dom
+- React Infinite Scroll Hook
+- Firebase Auth + Firestore
+- Axios
+- Styled Components
 - Vite
 - Conceitos: BEM e Mobile First
 
@@ -46,8 +54,8 @@ npm run preview
 ```
 
 ## 🖼️ Spoiler
-![image](https://github.com/HenriqueContini/Vitrine-Gamer/assets/81761545/c501991f-d5b7-4185-82ee-fe4d4110985e)
+![image](https://github.com/HenriqueContini/Vitrine-Gamer/assets/81761545/5681249c-2860-40ed-b7c2-b432a7e0f6f7)
 
-![image](https://github.com/HenriqueContini/Vitrine-Gamer/assets/81761545/7390d2f8-74ec-4988-a03f-4caa2b5d6471)
-![image](https://github.com/HenriqueContini/Vitrine-Gamer/assets/81761545/fc37c0c8-87f3-4056-91c5-78403e77a9a8)
+![image](https://github.com/HenriqueContini/Vitrine-Gamer/assets/81761545/fc661c08-539f-46c0-a5b3-29fad74d08d1)
+![image](https://github.com/HenriqueContini/Vitrine-Gamer/assets/81761545/0bf258e9-7fa4-4639-b475-ea2ace9b5419)
 

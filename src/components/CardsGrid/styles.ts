@@ -1,31 +1,26 @@
 import { styled } from "styled-components";
 
-export const Cards = styled.section<{ $blur: boolean }>`
+export const Cards = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`
+
+export const Scroller = styled.div<{ $blur: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 20px;
 
-  & .scroller {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-
-    filter: ${(props) => props.$blur ? 'blur(15px)' : 'none'};
-  }
+  filter: ${(props) => props.$blur ? 'blur(15px)' : 'none'};
 
   @media screen and (min-width: 600px) {
-    & .scroller {
-
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-around;
-    }
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
   }
 
   @media screen and (min-width: 960px) {
-    & .scroller {
-      gap: 50px;
-      max-width: 1400px;
-    }
+    gap: 50px;
+    max-width: 1400px;
   }
 `

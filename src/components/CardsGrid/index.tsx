@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import InfiniteScroll from 'react-infinite-scroller';
 import Game from '../../interfaces/Game'
 import Card from '../Card'
 import * as S from './styles'
 import Loader from '../Loader';
 import ModalError from '../ModalError';
 import SortGrid from '../SortGrid';
+import useInfiniteScroll from 'react-infinite-scroll-hook';
 
 interface CardsGridProps {
   updateData: (newGame: Game) => void
@@ -19,15 +19,8 @@ export default function CardsGrid({ filteredData, updateData, setFilteredData }:
   const [currentIndexData, setCurrentIndexData] = useState<number>(0)
   const [showError, setShowError] = useState<boolean>(false)
 
-  const splitData = (len: number) => {
-    let parts = [], i = 0, n = filteredData.length
-
-    while (i < n) {
-      parts.push(filteredData.slice(i, i += len))
-    }
-
-    return parts
-  }
+  const [hasNextPage, setHasNextPage] = useState(false)
+  const [loading] = useState(false)
 
   const loadMoreData = () => {
     if (splittedData) {
@@ -39,7 +32,18 @@ export default function CardsGrid({ filteredData, updateData, setFilteredData }:
 
         setDisplayData(prev => [...prev, ...newData])
       }
+      setHasNextPage(currentIndexData + 1 < splittedData.length)
     }
+  }
+
+  const splitData = (len: number) => {
+    let parts = [], i = 0, n = filteredData.length
+
+    while (i < n) {
+      parts.push(filteredData.slice(i, i += len))
+    }
+
+    return parts
   }
 
   useEffect(() => {
@@ -50,17 +54,29 @@ export default function CardsGrid({ filteredData, updateData, setFilteredData }:
   useEffect(() => {
     if (splittedData) {
       setDisplayData(splittedData[0])
+      setHasNextPage(currentIndexData + 1 < splittedData.length)
     }
   }, [splittedData])
 
+  const [sentryRef] = useInfiniteScroll({
+    loading,
+    hasNextPage,
+    onLoadMore: loadMoreData,
+  });
+
   return (
-    <S.Cards $blur={showError}>
+    <S.Cards>
       {displayData && splittedData &&
         <>
           <SortGrid filteredData={filteredData} setFilteredData={setFilteredData} />
-          <InfiniteScroll className={`scroller`} loadMore={() => loadMoreData()} hasMore={currentIndexData + 1 < splittedData.length} loader={<Loader key={0} />}>
+          <S.Scroller $blur={showError}>
             {displayData.map(game => <Card setShowError={setShowError} key={game.id} data={game} updateData={updateData} />)}
-          </InfiniteScroll >
+            {(loading || hasNextPage) && (
+              <div ref={sentryRef}>
+                <Loader />
+              </div>
+            )}
+          </S.Scroller>
         </>
       }
 

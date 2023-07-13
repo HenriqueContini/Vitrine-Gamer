@@ -17,5 +17,6 @@ export const Star = styled.div<{$star: boolean}>`
   
   &:hover {
     color: var(--white);
+    transform: translateX(0) scale(1.4);
   }
 `

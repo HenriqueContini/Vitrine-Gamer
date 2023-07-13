@@ -27,11 +27,7 @@ export default function Nav() {
   const handleUser = async () => {
     let user = await checkUser()
 
-    if (user) {
-      return setHasUser(true)
-    }
-
-    setHasUser(false)
+    setHasUser(user ? true : false)
   }
 
   useEffect(() => {

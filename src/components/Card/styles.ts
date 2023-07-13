@@ -57,6 +57,6 @@ export const Favorite = styled.div<{$favorite: boolean}>`
   transition: 0.5s;
   
   &:hover {
-    color: var(--white);
+    transform: translateX(0) scale(1.3);
   }
 `

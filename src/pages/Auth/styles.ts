@@ -1,17 +1,17 @@
 import { styled } from "styled-components";
 
-export const Main = styled.main`
+export const Main = styled.main<{$reverse: boolean}>`
   display: flex;
   flex-direction: column;
 
   @media screen and (min-width: 600px){
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-items: stretch;
+    flex-direction: ${(props) => props.$reverse ? 'row' : 'row-reverse'};
+    transition: 1s;
   }
 `
 
 export const Container = styled.section<{$color: string}>`
+  flex: 1;
   background-color: ${(props) => props.$color};
   display: flex;
   flex-direction: column;

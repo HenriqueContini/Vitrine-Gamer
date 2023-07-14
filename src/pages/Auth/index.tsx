@@ -17,7 +17,7 @@ export default function Auth() {
   }, [])
 
   return (
-    <S.Main>
+    <S.Main $reverse={showLogin}>
       <S.Container $color='var(--light-background)'>
         <S.Wrapper>
           <S.Img src={vg1} alt='Pessoa jogando videogame' />

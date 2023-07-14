@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 export const Main = styled.main`
   display: flex;
@@ -10,9 +10,22 @@ export const Main = styled.main`
   min-height: 100vh;
 `
 
+const ani = keyframes`
+  25% {
+    transform: skewX(20deg);
+  }
+  50% {
+    transform: skewX(0deg);
+  }
+  75% {
+    transform: skewX(-20deg);
+  }
+`
+
 export const Title = styled.h1`
   font-size: 2.75rem;
   color: var(--main-color);
+  animation: ${ani} 4s linear infinite;
   text-align: center;
   text-transform: uppercase;
 `
@@ -34,6 +47,7 @@ export const LinkWrapper = styled.div`
 
   & > a {
     display: block;
+    font-size: 1.25rem;
     padding: 10px 30px;
     border-radius: 10px;
     border: 1px solid var(--main-color);

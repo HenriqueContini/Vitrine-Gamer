@@ -6,6 +6,8 @@ import { checkUser } from '../../services/user'
 import { AiFillHeart } from 'react-icons/ai'
 import { addStars } from '../../services/star'
 import Stars from '../Stars'
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 
 interface CardProps {
   data: Game
@@ -74,7 +76,9 @@ export default function Card({ data, setShowError, updateData }: CardProps) {
           <AiFillHeart />
         </S.Favorite>
       </S.RowWrapper>
-      <S.CardImg src={data.thumbnail} alt={`Imagem ${data.title}`} loading='lazy' />
+      <S.CardImg>
+        <LazyLoadImage src={data.thumbnail} alt={`Imagem ${data.title}`}/>
+      </S.CardImg>
       <S.RowWrapper>
         <S.CardText>{data.genre} - {new Date(data.release_date).getFullYear()}</S.CardText>
         <Stars handleStars={handleStars} stars={stars} />

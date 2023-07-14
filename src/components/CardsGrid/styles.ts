@@ -20,7 +20,7 @@ export const Scroller = styled.div<{ $blur: boolean }>`
   }
 
   @media screen and (min-width: 960px) {
-    gap: 50px;
+    gap: 30px;
     max-width: 1400px;
   }
 `

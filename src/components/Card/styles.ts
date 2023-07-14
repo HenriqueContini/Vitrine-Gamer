@@ -30,9 +30,13 @@ export const RowWrapper = styled.div`
   align-items: center;
 `
 
-export const CardImg = styled.img`
+export const CardImg = styled.div`
   border-radius: 10px;
   width: 100%;
+
+  & > img {
+    width: 100%;
+  }
 `
 
 export const CardTitle = styled.h4`

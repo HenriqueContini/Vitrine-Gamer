@@ -26,6 +26,7 @@ Durante a 2º fase do projeto, foi feita uma nova UI com o Styled Components. Ta
 - React loader spinner
 - React Router Dom
 - React Infinite Scroll Hook
+- React Lazy Load Image Component
 - Firebase Auth + Firestore
 - Axios
 - Styled Components

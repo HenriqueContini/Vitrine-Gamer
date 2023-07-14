@@ -15,22 +15,13 @@ async function getGamesData(): Promise<ApiResponse> {
       timeout: 5000
     })
 
-    const firebaseGames = await getAllData()
+    const update = await updateGamesData(response.data)
 
-    let data: Game[] = response.data
-
-    if (firebaseGames.data) {
-      firebaseGames.data.map((frGame) => {
-        data.map((game) => {
-          if (frGame.id === game.id) {
-            game.isFavorite = frGame.isFavorite
-            game.stars = frGame.stars
-          }
-        })
-      })
+    if (update.error) {
+      return {error: true, msg: update.msg}
     }
 
-    return {data: data, error: false}
+    return {data: update.data, error: false}
   } catch (error) {
     if (isAxiosError(error)) {
       if(error.code === 'ECONNABORTED') {
@@ -43,4 +34,29 @@ async function getGamesData(): Promise<ApiResponse> {
   }
 }
 
-export default getGamesData
+async function updateGamesData(data: Game[]): Promise<ApiResponse> {
+  try {
+    const firebaseGames = await getAllData()
+    let newData: Game[] = data
+
+    if (firebaseGames.data) {
+      firebaseGames.data.map((frGame) => {
+        newData.map((game) => {
+          if (frGame.id === game.id) {
+            game.isFavorite = frGame.isFavorite
+            game.stars = frGame.stars
+          }
+        })
+      })
+    }
+
+    return {data: newData, error: false}
+  } catch (error) {
+    return { error: true, msg: "Ocorreu um erro ao buscar os dados" }
+  }
+}
+
+export {
+  getGamesData,
+  updateGamesData
+}

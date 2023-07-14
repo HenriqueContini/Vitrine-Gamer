@@ -2,7 +2,7 @@ import * as S from './styles'
 import { useEffect, useState } from 'react'
 import Banner from '../../components/Banner'
 import Search from '../../components/Search'
-import getGamesData from '../../services/gamesData'
+import { getGamesData, updateGamesData } from '../../services/gamesData'
 import ApiResponse from '../../interfaces/ApiResponse'
 import Loader from '../../components/Loader'
 import ApiError from '../../components/ApiError'
@@ -47,8 +47,16 @@ export default function Home() {
     fetchData()
   }
 
-  const updateData = (newGame: Game) => {
-    setData(prev => prev.map((game) => game.id === newGame.id ? {...game, isFavorite: newGame.isFavorite, stars: newGame.stars} : {...game}))
+  const updateData = async () => {
+    let response = await updateGamesData(data)
+    if(response.data) {
+      return setData(response.data)
+    }
+
+    setDataError({
+      error: response.error,
+      msg: response.msg
+    })
   }
 
   useEffect(() => {
